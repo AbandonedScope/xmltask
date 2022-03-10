@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="urn:gems"
+        xmlns:tns="urn:gems">
+    <element name="gems">
+        <complexType>
+            <sequence>
+                <element ref="tns:gem" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+    <simpleType name="gemID">
+        <restriction base="ID">
+            <pattern value="\w{8,20}"/>
+        </restriction>
+    </simpleType>
+    <complexType name="gem">
+        <all>
+            <element name="name" type="string"/>
+            <element name="visual-parameters" type="tns:visual-parameters"/>
+        </all>
+        <attribute name="id" type="tns:gemID" use="required"/>
+        <attribute name="production-date" type="time" use="optional"/>
+    </complexType>
+
+    <complexType name="preciousStones">
+        <complexContent>
+            <extension base="tns:gem">
+                <all>
+                    <element name="origin" type="tns:origin"/>
+                    <element name="preciousness" type="tns:preciousness"/>
+                </all>
+                <attribute name="faces" type="tns:faces"/>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <complexType name="jewelryOrnamentalStone">
+        <complexContent>
+            <extension base="tns:gem">
+                <all>
+                    <element name="animal-producer" type="string"/>
+                </all>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <simpleType name="preciousness">
+        <restriction base="string">
+            <enumeration value="Precious"/>
+            <enumeration value="Semi-precious"/>
+        </restriction>
+    </simpleType>
+    <complexType name="origin">
+        <all>
+            <element name="country" type="string"/>
+            <element name="mine-name" type="string"/>
+        </all>
+    </complexType>
+    <complexType name="visual-parameters">
+        <all>
+            <element name="color" type="string"/>
+            <element name="transparency" type="tns:transparency"/>
+        </all>
+    </complexType>
+    <simpleType name="transparency">
+        <restriction base="unsignedInt">
+            <minInclusive value="0"/>
+            <maxInclusive value="100"/>
+        </restriction>
+    </simpleType>
+    <simpleType name="faces">
+        <restriction base="unsignedInt">
+            <minInclusive value="4"/>
+            <maxInclusive value="15"/>
+        </restriction>
+    </simpleType>
+
+    <element name="gem" type="tns:gem" abstract="true"/>
+    <element name="precious-stones" type="tns:preciousStones" substitutionGroup="tns:gem"/>
+    <element name="jewelry-ornamental-stone" type="tns:jewelryOrnamentalStone" substitutionGroup="tns:gem"/>
+</schema>
