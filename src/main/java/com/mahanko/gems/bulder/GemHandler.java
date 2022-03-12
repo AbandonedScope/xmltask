@@ -90,6 +90,8 @@ public class GemHandler extends DefaultHandler {
                 case ANIMAL_PRODUCER:
                     ((JewelryOrnamentalStoneEntity)currentGem).setAnimalProducer(data);
                     break;
+                default:
+                    break;
             }
             currentXmlTag = null;
         }

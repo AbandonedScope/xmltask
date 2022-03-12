@@ -15,7 +15,7 @@ public abstract class GemEntity {
         productionDate = YearMonth.now();
     }
 
-    public GemEntity(String id, String name, GemVisualParameters visualParameters, YearMonth productionDate) {
+    protected GemEntity(String id, String name, GemVisualParameters visualParameters, YearMonth productionDate) {
         this.id = id;
         this.name = name;
         this.visualParameters = visualParameters;

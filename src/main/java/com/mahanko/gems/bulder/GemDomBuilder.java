@@ -46,9 +46,9 @@ public class GemDomBuilder extends AbstractGemBuilder { // FIXME: 12.03.2022 log
                     gems.add(buildGem((Element) gemNode));
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException e) { // FIXME: 12.03.2022 
             e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (SAXException e) { // FIXME: 12.03.2022 
             e.printStackTrace();
         }
     }
