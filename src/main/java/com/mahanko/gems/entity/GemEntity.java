@@ -56,7 +56,8 @@ public abstract class GemEntity {
 
     @Override
     public String toString() {
-        return "name='" + name + '\'' + visualParameters.toString();
+        return "name='" + name + "'\n" +
+                visualParameters.toString();
     }
 
     @Override

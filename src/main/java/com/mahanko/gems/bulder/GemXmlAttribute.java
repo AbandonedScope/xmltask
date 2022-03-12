@@ -1,11 +1,12 @@
-package com.mahanko.gems.entity;
+package com.mahanko.gems.bulder;
 
 import java.util.Locale;
 
-public enum GemPreciousnessType {
-    PRECIOUS,
-    SEMI_PRECIOUS,
-    NON;
+public enum GemXmlAttribute {
+    ID,
+    FACES,
+    PRODUCTION_DATE,
+    VALUE;
 
     @Override
     public String toString() {

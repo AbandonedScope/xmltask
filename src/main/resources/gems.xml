@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gems xmlns="http://www.example.org/gems"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.example.org/gems schema/schema.xsd">
+    <precious-stone id="fb8cvb13r" production-date="2020-07" value="5">
+        <name>Opal</name>
+        <visual-parameters>
+            <color>Blue</color>
+            <transparency>0</transparency>
+        </visual-parameters>
+        <origin>
+            <country>Australia</country>
+            <mine-name>Coober Pedy</mine-name>
+        </origin>
+        <preciousness>Precious</preciousness>
+    </precious-stone>
+    <precious-stone id="cv58vb13d" value="7" faces="15">
+        <name>Diamond</name>
+        <visual-parameters>
+            <color>Colorless</color>
+            <transparency>100</transparency>
+        </visual-parameters>
+        <origin>
+            <country>Republic of South Africa</country>
+            <mine-name>Kimberley</mine-name>
+        </origin>
+        <preciousness>Precious</preciousness>
+    </precious-stone>
+    <jewelry-ornamental-stone id="v7891vxf2">
+        <name>Pearl</name>
+        <visual-parameters>
+            <color>Mother of Pearl</color>
+            <transparency>0</transparency>
+        </visual-parameters>
+        <animal-producer>Pinctada margaritifera</animal-producer>
+    </jewelry-ornamental-stone>
+</gems>

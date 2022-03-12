@@ -34,7 +34,7 @@ public class GemVisualParameters {
 
     @Override
     public String toString() {
-        return "color='" + color + '\'' +
+        return "color='" + color + "'\n" +
                 "transparency=" + transparency;
     }
 

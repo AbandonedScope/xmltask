@@ -27,7 +27,8 @@ public class JewelryOrnamentalStoneEntity extends GemEntity {
 
     @Override
     public String toString() {
-        return "animalProducer=" + animalProducer + '\'' + super.toString();
+        return "animalProducer='" + animalProducer + "'\n" +
+                super.toString();
     }
 
     @Override

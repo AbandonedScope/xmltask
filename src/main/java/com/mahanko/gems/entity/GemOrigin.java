@@ -33,8 +33,8 @@ public class GemOrigin {
 
     @Override
     public String toString() {
-        return "country='" + country + '\'' +
-                "mineName='" + mineName;
+        return "country='" + country + "'\n" +
+                "mineName='" + mineName + '\'';
     }
 
     @Override
