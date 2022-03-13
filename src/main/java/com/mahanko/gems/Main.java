@@ -2,6 +2,7 @@ package com.mahanko.gems;
 
 import com.mahanko.gems.bulder.GemDomBuilder;
 import com.mahanko.gems.bulder.GemSaxBuilder;
+import com.mahanko.gems.bulder.GemStaxBuilder;
 import com.mahanko.gems.entity.GemEntity;
 
 public class Main {
@@ -11,7 +12,9 @@ public class Main {
         saxBuilder.buildSetGems(path);
         GemDomBuilder domBuilder = new GemDomBuilder();
         domBuilder.buildSetGems(path);
-        for (GemEntity gem: domBuilder.getGems()) {
+        GemStaxBuilder staxBuilder = new GemStaxBuilder();
+        staxBuilder.buildSetGems(path);
+        for (GemEntity gem: staxBuilder.getGems()) {
             System.out.println(gem.toString());
         }
     }

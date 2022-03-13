@@ -11,9 +11,11 @@ import java.util.Set;
 
 public class GemSaxBuilder extends AbstractGemBuilder { // FIXME: 12.03.2022 logger
     private org.xml.sax.XMLReader reader;
+    protected GemHandler handler;
 
     public GemSaxBuilder() {
         super();
+        handler = new GemHandler();
         SAXParserFactory factory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = factory.newSAXParser();
