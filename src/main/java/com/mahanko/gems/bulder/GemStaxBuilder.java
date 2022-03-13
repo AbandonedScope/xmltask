@@ -1,23 +1,25 @@
 package com.mahanko.gems.bulder;
 
 import com.mahanko.gems.entity.*;
+import com.mahanko.gems.exception.CustomXmlParserException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.YearMonth;
 import java.util.Locale;
-import java.util.Set;
 
 import static javax.xml.stream.XMLStreamConstants.END_ELEMENT;
 import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
 
-public class GemStaxBuilder extends AbstractGemBuilder { // FIXME: 13.03.2022 logging
-    private XMLInputFactory factory;
+public class GemStaxBuilder extends AbstractGemBuilder {
+    private static final Logger logger = LogManager.getLogger();
+    private final XMLInputFactory factory;
 
     public GemStaxBuilder() {
         super();
@@ -25,24 +27,19 @@ public class GemStaxBuilder extends AbstractGemBuilder { // FIXME: 13.03.2022 lo
     }
 
     @Override
-    public Set<GemEntity> getGems() {
-        return gems;
-    }
-
-    @Override
-    public void buildSetGems(String path) { // FIXME: 13.03.2022 exeptions
+    public void buildSetGems(String path) throws CustomXmlParserException {
         XMLStreamReader reader;
-        String name;
-        try (FileInputStream file = new FileInputStream(new File(path))) {
+        GemXmlTag tagType;
+        try (FileInputStream file = new FileInputStream(path)) {
             reader = factory.createXMLStreamReader(file);
             while (reader.hasNext()) {
                 int type = reader.next();
                 if (type == START_ELEMENT) {
-                    name = reader.getLocalName();
-                    if (name.equals(GemXmlTag.PRECIOUS_STONE.toString()) ||
-                            name.equals(GemXmlTag.JEWELRY_ORNAMENTAL_STONE.toString())) {
+                    tagType = getGemXmlTag(reader);
+                    if (tagType.equals(GemXmlTag.PRECIOUS_STONE) ||
+                            tagType.equals(GemXmlTag.JEWELRY_ORNAMENTAL_STONE)) {
                         GemEntity gem;
-                        if (name.equals(GemXmlTag.PRECIOUS_STONE.toString())) {
+                        if (tagType.equals(GemXmlTag.PRECIOUS_STONE)) {
                             gem = new PreciousStoneEntity();
                         } else {
                             gem = new JewelryOrnamentalStoneEntity();
@@ -52,10 +49,9 @@ public class GemStaxBuilder extends AbstractGemBuilder { // FIXME: 13.03.2022 lo
                     }
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException | XMLStreamException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR, e);
+            throw new CustomXmlParserException(e);
         }
     }
 
@@ -77,12 +73,12 @@ public class GemStaxBuilder extends AbstractGemBuilder { // FIXME: 13.03.2022 lo
             }
         }
 
-        String elementName;
+        GemXmlTag tagType;
         while (reader.hasNext()) {
             int type = reader.next();
             if (type == START_ELEMENT) {
-                elementName = reader.getLocalName();
-                switch (GemXmlTag.valueOf(elementName.toUpperCase(Locale.ROOT).replace('-', '_'))) {
+                tagType = getGemXmlTag(reader);
+                switch (tagType) {
                     case NAME:
                         gem.setName(reader.getElementText());
                         break;
@@ -99,10 +95,12 @@ public class GemStaxBuilder extends AbstractGemBuilder { // FIXME: 13.03.2022 lo
                     case ANIMAL_PRODUCER:
                         ((JewelryOrnamentalStoneEntity) gem).setAnimalProducer(reader.getElementText());
                         break;
+                    default:
+                        break;
                 }
             } else if (type == END_ELEMENT) {
-                elementName = reader.getLocalName();
-                if (elementName.equals(GemXmlTag.PRECIOUS_STONE.toString()) || elementName.equals(GemXmlTag.JEWELRY_ORNAMENTAL_STONE.toString())) {
+                tagType = getGemXmlTag(reader);
+                if (tagType.equals(GemXmlTag.PRECIOUS_STONE) || tagType.equals(GemXmlTag.JEWELRY_ORNAMENTAL_STONE)) {
                     break;
                 }
             }
@@ -111,21 +109,19 @@ public class GemStaxBuilder extends AbstractGemBuilder { // FIXME: 13.03.2022 lo
 
     private GemVisualParameters getXmlGemVisualParameters(XMLStreamReader reader) throws XMLStreamException {
         GemVisualParameters parameters = new GemVisualParameters();
-        String elementName;
+        GemXmlTag tagType;
         while (reader.hasNext()) {
             int type = reader.next();
             if (type == START_ELEMENT) {
-                elementName = reader.getLocalName();
-                switch (GemXmlTag.valueOf(elementName.toUpperCase(Locale.ROOT).replace('-', '_'))) {
-                    case COLOR:
-                        parameters.setColor(reader.getElementText());
-                        break;
-                    case TRANSPARENCY:
-                        parameters.setTransparency(Integer.parseInt(reader.getElementText()));
+                tagType = getGemXmlTag(reader);
+                if (tagType.equals(GemXmlTag.COLOR)) {
+                    parameters.setColor(reader.getElementText());
+                } else {
+                    parameters.setTransparency(Integer.parseInt(reader.getElementText()));
                 }
             } else if (type == END_ELEMENT) {
-                elementName = reader.getLocalName();
-                if (elementName.equals(GemXmlTag.VISUAL_PARAMETERS.toString())) {
+                tagType = getGemXmlTag(reader);
+                if (tagType.equals(GemXmlTag.VISUAL_PARAMETERS)) {
                     break;
                 }
             }
@@ -136,26 +132,29 @@ public class GemStaxBuilder extends AbstractGemBuilder { // FIXME: 13.03.2022 lo
 
     private GemOrigin getXmlGemOrigin(XMLStreamReader reader) throws XMLStreamException {
         GemOrigin origin = new GemOrigin();
-        String elementName;
+        GemXmlTag tagType;
         while (reader.hasNext()) {
             int type = reader.next();
             if (type == START_ELEMENT) {
-                elementName = reader.getLocalName();
-                switch (GemXmlTag.valueOf(elementName.toUpperCase(Locale.ROOT).replace('-', '_'))) {
-                    case COUNTRY:
-                        origin.setCountry(reader.getElementText());
-                        break;
-                    case MINE_NAME:
-                        origin.setMineName(reader.getElementText());
+                tagType = getGemXmlTag(reader);
+                if (tagType.equals(GemXmlTag.COUNTRY)) {
+                    origin.setCountry(reader.getElementText());
+                } else {
+                    origin.setMineName(reader.getElementText());
                 }
             } else if (type == END_ELEMENT) {
-                elementName = reader.getLocalName();
-                if (elementName.equals(GemXmlTag.ORIGIN.toString())) {
+                tagType = getGemXmlTag(reader);
+                if (tagType.equals(GemXmlTag.ORIGIN)) {
                     break;
                 }
             }
         }
 
         return origin;
+    }
+
+    private GemXmlTag getGemXmlTag(XMLStreamReader reader) {
+        String elementName = reader.getLocalName();
+        return GemXmlTag.valueOf(elementName.toUpperCase(Locale.ROOT).replace('-', '_'));
     }
 }

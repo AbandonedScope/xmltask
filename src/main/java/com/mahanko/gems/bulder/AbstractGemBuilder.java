@@ -1,7 +1,6 @@
 package com.mahanko.gems.bulder;
-
 import com.mahanko.gems.entity.GemEntity;
-
+import com.mahanko.gems.exception.CustomXmlParserException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +10,8 @@ public abstract class AbstractGemBuilder {
     protected AbstractGemBuilder() {
         gems = new HashSet<>();
     }
-    public abstract Set<GemEntity> getGems();
-    public abstract void buildSetGems(String path);
+    public Set<GemEntity> getGems() {
+        return gems;
+    }
+    public abstract void buildSetGems(String path) throws CustomXmlParserException;
 }

@@ -5,7 +5,6 @@ import com.mahanko.gems.entity.GemPreciousnessType;
 import com.mahanko.gems.entity.JewelryOrnamentalStoneEntity;
 import com.mahanko.gems.entity.PreciousStoneEntity;
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.time.YearMonth;
@@ -15,10 +14,10 @@ import java.util.Locale;
 import java.util.Set;
 
 public class GemHandler extends DefaultHandler {
-    private Set<GemEntity> gems;
+    private final Set<GemEntity> gems;
     private GemEntity currentGem;
     private GemXmlTag currentXmlTag;
-    private EnumSet<GemXmlTag> withText;
+    private final EnumSet<GemXmlTag> withText;
     private static final String ELEMENT_PRECIOUS_STONE = "precious-stone";
     private static final String ELEMENT_JEWELRY_ORNAMENTAL_STONE = "jewelry-ornamental-stone";
 
@@ -32,7 +31,7 @@ public class GemHandler extends DefaultHandler {
     }
 
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String qName, Attributes attributes) {
         if (ELEMENT_PRECIOUS_STONE.equals(qName) || ELEMENT_JEWELRY_ORNAMENTAL_STONE.equals(qName)) {
             if (ELEMENT_PRECIOUS_STONE.equals(qName)) {
                 currentGem = new PreciousStoneEntity();
@@ -58,14 +57,14 @@ public class GemHandler extends DefaultHandler {
     }
 
     @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
+    public void endElement(String uri, String localName, String qName) {
         if (ELEMENT_PRECIOUS_STONE.equals(qName) || ELEMENT_JEWELRY_ORNAMENTAL_STONE.equals(qName)) {
             gems.add(currentGem);
         }
     }
 
     @Override
-    public void characters(char[] ch, int start, int length) throws SAXException {
+    public void characters(char[] ch, int start, int length) {
         String data = new String(ch, start, length);
         if (currentXmlTag != null) {
             switch (currentXmlTag) {

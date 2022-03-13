@@ -1,6 +1,10 @@
 package com.mahanko.gems.bulder;
 
 import com.mahanko.gems.entity.*;
+import com.mahanko.gems.exception.CustomXmlParserException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,28 +17,24 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.time.YearMonth;
 import java.util.Locale;
-import java.util.Set;
 
-public class GemDomBuilder extends AbstractGemBuilder { // FIXME: 12.03.2022 logger
-    private DocumentBuilder docBuilder;
+public class GemDomBuilder extends AbstractGemBuilder {
+    private static final Logger logger = LogManager.getLogger();
+    private final DocumentBuilder docBuilder;
 
-    public GemDomBuilder() {
+    public GemDomBuilder() throws CustomXmlParserException {
         super();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             docBuilder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) { // FIXME: 12.03.2022
-            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            logger.log(Level.ERROR, e);
+            throw new CustomXmlParserException(e);
         }
     }
 
     @Override
-    public Set<GemEntity> getGems() {
-        return gems;
-    }
-
-    @Override
-    public void buildSetGems(String path) {
+    public void buildSetGems(String path) throws CustomXmlParserException {
         Document doc;
         try {
             doc = docBuilder.parse(path);
@@ -46,8 +46,9 @@ public class GemDomBuilder extends AbstractGemBuilder { // FIXME: 12.03.2022 log
                     gems.add(buildGem((Element) gemNode));
                 }
             }
-        } catch (IOException | SAXException e) { // FIXME: 12.03.2022
-            e.printStackTrace();
+        } catch (IOException | SAXException e) {
+            logger.log(Level.ERROR, e);
+            throw new CustomXmlParserException(e);
         }
     }
 
