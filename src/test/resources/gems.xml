@@ -14,4 +14,24 @@
         </origin>
         <preciousness>Precious</preciousness>
     </precious-stone>
+    <precious-stone id="cv58vb13d" value="7" faces="15">
+        <name>Diamond</name>
+        <visual-parameters>
+            <color>Colorless</color>
+            <transparency>100</transparency>
+        </visual-parameters>
+        <origin>
+            <country>Republic of South Africa</country>
+            <mine-name>Kimberley</mine-name>
+        </origin>
+        <preciousness>Precious</preciousness>
+    </precious-stone>
+    <jewelry-ornamental-stone id="v7891vxf2">
+        <name>Pearl</name>
+        <visual-parameters>
+            <color>Mother of Pearl</color>
+            <transparency>0</transparency>
+        </visual-parameters>
+        <animal-producer>Pinctada margaritifera</animal-producer>
+    </jewelry-ornamental-stone>
 </gems>
