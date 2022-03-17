@@ -1,4 +1,4 @@
-package com.mahanko.gems.bulder;
+package com.mahanko.gems.parser;
 import com.mahanko.gems.entity.GemEntity;
 import com.mahanko.gems.exception.CustomXmlParserException;
 import java.util.HashSet;

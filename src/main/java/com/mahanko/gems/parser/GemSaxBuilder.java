@@ -1,4 +1,4 @@
-package com.mahanko.gems.bulder;
+package com.mahanko.gems.parser;
 import com.mahanko.gems.exception.CustomXmlParserException;
 import com.mahanko.gems.handler.GemHandler;
 import org.apache.logging.log4j.Level;

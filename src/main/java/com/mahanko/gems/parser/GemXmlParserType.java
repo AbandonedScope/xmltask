@@ -1,4 +1,4 @@
-package com.mahanko.gems.bulder;
+package com.mahanko.gems.parser;
 
 public enum GemXmlParserType {
     DOM,

@@ -1,5 +1,6 @@
 package com.mahanko.gems.validator;
 
+import com.mahanko.gems.exception.CustomXmlParserException;
 import com.mahanko.gems.handler.GemErrorHandler;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -24,7 +25,7 @@ public class CustomXmlValidator {
         factory = SchemaFactory.newInstance(LANGUAGE);
     }
 
-    public void valid(String pathXsd, String pathXml) {
+    public void valid(String pathXsd, String pathXml) throws CustomXmlParserException {
         File schemaLocation = new File(pathXsd);
         try {
             Schema schema = factory.newSchema(schemaLocation);
@@ -34,6 +35,7 @@ public class CustomXmlValidator {
             validator.validate(source);
         } catch (SAXException | IOException e) {
             logger.log(Level.ERROR, e.getMessage());
+            throw new CustomXmlParserException(e);
         }
     }
 }

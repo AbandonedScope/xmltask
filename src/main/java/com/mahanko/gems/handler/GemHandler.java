@@ -1,7 +1,7 @@
 package com.mahanko.gems.handler;
 
-import com.mahanko.gems.bulder.GemXmlAttribute;
-import com.mahanko.gems.bulder.GemXmlTag;
+import com.mahanko.gems.parser.GemXmlAttribute;
+import com.mahanko.gems.parser.GemXmlTag;
 import com.mahanko.gems.entity.GemEntity;
 import com.mahanko.gems.entity.GemPreciousnessType;
 import com.mahanko.gems.entity.JewelryOrnamentalStoneEntity;
