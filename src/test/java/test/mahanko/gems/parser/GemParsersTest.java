@@ -36,52 +36,33 @@ public class GemParsersTest {
     @DataProvider
     public Object[][] gemLocalData() {
         return new Object[][]{
-                {gemXmlPath, firstGemsList}
+                {GemXmlParserType.SAX, gemXmlPath, firstGemsList},
+                {GemXmlParserType.DOM, gemXmlPath, firstGemsList},
+                {GemXmlParserType.STAX, gemXmlPath, firstGemsList},
         };
     }
 
-    @Test(expectedExceptions = CustomXmlParserException.class)
-    public void parseEmptyXmlUsingSax() throws CustomXmlParserException {
-        AbstractGemBuilder saxBuilder = GemBuilderFactory.createGemBuilder(GemXmlParserType.SAX);
-        saxBuilder.buildSetGems(emptyXmlPath);
+    @DataProvider
+    public Object[][] gemEmpty() {
+        return new Object[][]{
+                {GemXmlParserType.SAX, emptyXmlPath},
+                {GemXmlParserType.DOM, emptyXmlPath},
+                {GemXmlParserType.STAX, emptyXmlPath}
+        };
     }
 
-    @Test(expectedExceptions = CustomXmlParserException.class)
-    public void parseEmptyXmlUsingStax() throws CustomXmlParserException {
-        AbstractGemBuilder saxBuilder = GemBuilderFactory.createGemBuilder(GemXmlParserType.STAX);
-        saxBuilder.buildSetGems(emptyXmlPath);
-    }
-
-    @Test(expectedExceptions = CustomXmlParserException.class)
-    public void parseEmptyXmlUsingDom() throws CustomXmlParserException {
-        AbstractGemBuilder saxBuilder = GemBuilderFactory.createGemBuilder(GemXmlParserType.DOM);
-        saxBuilder.buildSetGems(emptyXmlPath);
+    @Test(expectedExceptions = CustomXmlParserException.class, dataProvider = "gemEmpty")
+    public void parseEmptyXmlTest(GemXmlParserType parserType, String path) throws CustomXmlParserException {
+        AbstractGemBuilder saxBuilder = GemBuilderFactory.createGemBuilder(parserType);
+        saxBuilder.buildSetGems(path);
     }
 
     @Test(dataProvider = "gemLocalData")
-    public void parseFirstXmlUsingSax(String path, List gemList) throws CustomXmlParserException {
-        AbstractGemBuilder saxBuilder = GemBuilderFactory.createGemBuilder(GemXmlParserType.SAX);
+    public void parseXmlTest(GemXmlParserType parserType, String path, List gemList) throws CustomXmlParserException {
+        AbstractGemBuilder saxBuilder = GemBuilderFactory.createGemBuilder(parserType);
         saxBuilder.buildSetGems(path);
         Set<GemEntity> actual = saxBuilder.getGems();
         Set<GemEntity> expected = new HashSet<GemEntity>(gemList);
         Assert.assertEqualsDeep(actual, expected, null);
-    }
-
-    @Test(dataProvider = "gemLocalData")
-    public void parseFirstXmlUsingStax(String path, List gemList) throws CustomXmlParserException {
-        AbstractGemBuilder saxBuilder = GemBuilderFactory.createGemBuilder(GemXmlParserType.STAX);
-        saxBuilder.buildSetGems(path);
-        Set<GemEntity> actual = saxBuilder.getGems();
-        Set<GemEntity> expected = new HashSet<GemEntity>(gemList);
-        Assert.assertEquals(actual, expected);
-    }
-
-    @Test(dataProvider = "gemLocalData")
-    public void parseFirstXmlUsingDom(String path, List gemList) throws CustomXmlParserException {
-        AbstractGemBuilder saxBuilder = GemBuilderFactory.createGemBuilder(GemXmlParserType.DOM);
-        saxBuilder.buildSetGems(path);
-        Set<GemEntity> actual = saxBuilder.getGems();
-        Set<GemEntity> expected = new HashSet<GemEntity>(gemList);
-        Assert.assertEquals(actual, expected);
     }
 }
