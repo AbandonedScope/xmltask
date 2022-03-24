@@ -34,4 +34,148 @@
         </visual-parameters>
         <animal-producer>Pinctada margaritifera</animal-producer>
     </jewelry-ornamental-stone>
+    <precious-stone value="12" id="fsgdf43r" >
+        <name>Malachite</name>
+        <visual-parameters>
+            <color>Green</color>
+            <transparency>0</transparency>
+        </visual-parameters>
+        <origin>
+            <country>United States</country>
+            <mine-name>Arizona</mine-name>
+        </origin>
+        <preciousness>Precious</preciousness>
+    </precious-stone>
+    <precious-stone id="cvx21egvf" faces="12" value="3">
+        <name>Elbaite</name>
+        <visual-parameters>
+            <color>Green</color>
+            <transparency>30</transparency>
+        </visual-parameters>
+        <origin>
+            <country>Brazil</country>
+            <mine-name>Cruziero pegmatite</mine-name>
+        </origin>
+        <preciousness>Precious</preciousness>
+    </precious-stone>
+    <jewelry-ornamental-stone production-date="1970-05" id="urigkf5551" >
+        <name>Amber</name>
+        <visual-parameters>
+            <color>Yellow</color>
+            <transparency>20</transparency>
+        </visual-parameters>
+        <animal-producer>Sequoia sempervirens</animal-producer>
+    </jewelry-ornamental-stone>
+    <jewelry-ornamental-stone id="fdxfc21ms" production-date="1890-03">
+        <name>Bone</name>
+        <visual-parameters>
+            <color>White</color>
+            <transparency>0</transparency>
+        </visual-parameters>
+        <animal-producer>Elephant</animal-producer>
+    </jewelry-ornamental-stone>
+    <precious-stone production-date="1993-07" id="rty54vkh56" value="6">
+        <name>Quartz</name>
+        <visual-parameters>
+            <color>Rose</color>
+            <transparency>70</transparency>
+        </visual-parameters>
+        <origin>
+            <country>Spain</country>
+            <mine-name>Caldoveiro Peak</mine-name>
+        </origin>
+        <preciousness>Semi-precious</preciousness>
+    </precious-stone>
+    <precious-stone id="jjfv25xbsd" value="13">
+        <name>Quartz</name>
+        <visual-parameters>
+            <color>Brown to grey</color>
+            <transparency>50</transparency>
+        </visual-parameters>
+        <origin>
+            <country>Scotland</country>
+            <mine-name>Cairngorm Mountains</mine-name>
+        </origin>
+        <preciousness>Semi-precious</preciousness>
+    </precious-stone>
+    <jewelry-ornamental-stone production-date="2003-06" id="sdgf231dfg">
+        <name>Pearl</name>
+        <visual-parameters>
+            <color>Mother of Pearl</color>
+            <transparency>0</transparency>
+        </visual-parameters>
+        <animal-producer>Indian volute</animal-producer>
+    </jewelry-ornamental-stone>
+    <precious-stone id="tsdfjb544d" value="5">
+        <name>Ruby</name>
+        <visual-parameters>
+            <color>Purplish red</color>
+            <transparency>40</transparency>
+        </visual-parameters>
+        <origin>
+            <country>Shan State</country>
+            <mine-name>Mogok Valley</mine-name>
+        </origin>
+        <preciousness>Precious</preciousness>
+    </precious-stone>
+    <precious-stone id="vbvNgf65NKL" value="8">
+        <name>Pyrite</name>
+        <visual-parameters>
+            <color>Pale brass-yellow reflective</color>
+            <transparency>0</transparency>
+        </visual-parameters>
+        <origin>
+            <country>India</country>
+            <mine-name>Jharkhand</mine-name>
+        </origin>
+        <preciousness>Semi-precious</preciousness>
+    </precious-stone>
+    <precious-stone id="hgDmFRkBgv65" value="12" production-date="2006-05">
+        <name>Aquamarine</name>
+        <visual-parameters>
+            <color>Pale-blue</color>
+            <transparency>10</transparency>
+        </visual-parameters>
+        <origin>
+            <country>Brazil</country>
+            <mine-name>Bahia</mine-name>
+        </origin>
+        <preciousness>Precious</preciousness>
+    </precious-stone>
+    <precious-stone id="nbG15nFk" production-date="2000-07" value="5">
+        <name>Opal</name>
+        <visual-parameters>
+            <color>Green</color>
+            <transparency>0</transparency>
+        </visual-parameters>
+        <origin>
+            <country>Australia</country>
+            <mine-name>Coober Pedy</mine-name>
+        </origin>
+        <preciousness>Precious</preciousness>
+    </precious-stone>
+    <precious-stone id="bDjgC415V" value="12">
+        <name>Quartz</name>
+        <visual-parameters>
+            <color>Yellow</color>
+            <transparency>70</transparency>
+        </visual-parameters>
+        <origin>
+            <country>Scotland</country>
+            <mine-name>Cairngorm Mountains</mine-name>
+        </origin>
+        <preciousness>Semi-precious</preciousness>
+    </precious-stone>
+    <precious-stone id="ZXjhf458dvj" value="10" production-date="2008-02">
+        <name>Adamite</name>
+        <visual-parameters>
+            <color>Honey-yellow</color>
+            <transparency>10</transparency>
+        </visual-parameters>
+        <origin>
+            <country>United States</country>
+            <mine-name>Sierra Nevada</mine-name>
+        </origin>
+        <preciousness>Precious</preciousness>
+    </precious-stone>
 </gems>

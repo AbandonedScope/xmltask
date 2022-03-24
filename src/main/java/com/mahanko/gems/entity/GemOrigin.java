@@ -48,7 +48,7 @@ public class GemOrigin {
         }
 
         GemOrigin gemOrigin = (GemOrigin) obj;
-        return Objects.equals(country, gemOrigin.country) && Objects.equals(mineName, gemOrigin.mineName);
+        return country.equals(gemOrigin.country) && mineName.equals(gemOrigin.mineName);
     }
 
     @Override

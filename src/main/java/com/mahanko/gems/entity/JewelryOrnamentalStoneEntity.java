@@ -34,7 +34,7 @@ public class JewelryOrnamentalStoneEntity extends GemEntity {
     @Override
     public boolean equals(Object obj) {
         JewelryOrnamentalStoneEntity that = (JewelryOrnamentalStoneEntity) obj;
-        return super.equals(obj) && Objects.equals(animalProducer, that.animalProducer);
+        return super.equals(obj) && animalProducer.equals(that.animalProducer);
     }
 
     @Override

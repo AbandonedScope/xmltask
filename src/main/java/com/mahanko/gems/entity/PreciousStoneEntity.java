@@ -70,7 +70,7 @@ public class PreciousStoneEntity extends GemEntity {
     @Override
     public boolean equals(Object obj) {
         PreciousStoneEntity that = (PreciousStoneEntity) obj;
-        return super.equals(obj) && Objects.equals(origin, that.origin) && preciousness == that.preciousness;
+        return super.equals(obj) && origin.equals(that.origin) && preciousness == that.preciousness;
     }
 
     @Override
