@@ -14,7 +14,7 @@ import java.util.*;
 public class GemParsersTest {
     private final String gemXmlPath = "src/test/resources/gems.xml";
     private final String emptyXmlPath = "emptyFile.xml";
-    private final Set<GemEntity> gemsList = new HashSet<>( Arrays.asList(
+    private final Set<GemEntity> gemsList = new HashSet<>( List.of(
             new PreciousStoneEntity("fb8cvb13r", "Opal",
                     new GemVisualParameters("Blue", 0),
                     YearMonth.parse("2020-07"),
